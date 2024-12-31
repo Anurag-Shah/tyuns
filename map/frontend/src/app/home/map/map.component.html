@@ -1,0 +1,174 @@
+<div [ngStyle]="{'height': 'auto', 'width': '4000px', 'z-index': '9999'}">
+    <!-- Toolbar -->
+    <div class="ui pointing menu" [ngStyle]="{'width': '100vw', 'position': 'sticky', 'top': '0px', 'left': '0px', 'z-index': '9999' }">
+        <!-- Select -->
+        <a class="active item" *ngIf="mode==='select'"><i class="mouse pointer icon"></i></a>
+        <a class="item" *ngIf="mode!='select'" (click)="mode='select'"><i class="mouse pointer icon"></i></a>
+
+        <!-- Paint -->
+        <a class="active item" *ngIf="mode==='paint'"><i class="white pencil alternate icon"></i></a>
+        <a class="item" *ngIf="mode!='paint'" (click)="mode='paint'"><i class="white pencil alternate icon"></i></a>
+
+        <!-- so -->
+        <a class="active item" *ngIf="mode==='smalloutpost'"><img src="../../assets/small_outpost_icon.png" class="uaa-im"> </a>
+        <a class="item" *ngIf="mode!='smalloutpost'" (click)="mode='smalloutpost'"><img src="../../assets/small_outpost_icon.png" class="uaa-im"></a>
+
+        <!-- camp -->
+        <a class="active item" *ngIf="mode==='camp'"><img src="../../assets/camp_icon.png" class="uaa-im"> </a>
+        <a class="item" *ngIf="mode!='camp'" (click)="mode='camp'"><img src="../../assets/camp_icon.png" class="uaa-im"></a>
+
+        <!-- lo -->
+        <a class="active item" *ngIf="mode==='largeoutpost'"><img src="../../assets/large_outpost_icon.png" class="uaa-im"> </a>
+        <a class="item" *ngIf="mode!='largeoutpost'" (click)="mode='largeoutpost'"><img src="../../assets/large_outpost_icon.png" class="uaa-im"></a>
+
+        <!-- pen -->
+        <a class="active item" *ngIf="mode==='pen'"><img src="../../assets/pen_icon.png" class="uaa-im"> </a>
+        <a class="item" *ngIf="mode!='pen'" (click)="mode='pen'"><img src="../../assets/pen_icon.png" class="uaa-im"></a>
+
+        <!-- village -->
+        <a class="active item" *ngIf="mode==='village'"><img src="../../assets/village_icon.png" class="uaa-im"> </a>
+        <a class="item" *ngIf="mode!='village'" (click)="mode='village'"><img src="../../assets/village_icon.png" class="uaa-im"></a>
+
+        <!-- city -->
+        <a class="active item" *ngIf="mode==='city'"><img src="../../assets/city_icon.png" class="uaa-im"> </a>
+        <a class="item" *ngIf="mode!='city'" (click)="mode='city'"><img src="../../assets/city_icon.png" class="uaa-im"></a>
+
+        <!-- citadel -->
+        <a class="active item" *ngIf="mode==='citadel'"><img src="../../assets/citadel_icon.png" class="uaa-im"> </a>
+        <a class="item" *ngIf="mode!='citadel'" (click)="mode='citadel'"><img src="../../assets/citadel_icon.png" class="uaa-im"></a>
+
+        <!-- port -->
+        <a class="active item" *ngIf="mode==='port'"><img src="../../assets/port_icon.png" class="uaa-im"> </a>
+        <a class="item" *ngIf="mode!='port'" (click)="mode='port'"><img src="../../assets/port_icon.png" class="uaa-im"></a>
+
+        <!-- farm -->
+        <a class="active item" *ngIf="mode==='farm'"><img src="../../assets/large_farm_icon.png" class="uaa-im"> </a>
+        <a class="item" *ngIf="mode!='farm'" (click)="mode='farm'"><img src="../../assets/large_farm_icon.png" class="uaa-im"></a>
+
+        <!-- trade -->
+        <a class="active item" *ngIf="mode==='trade'"><img src="../../assets/trade_icon.png" class="uaa-im"> </a>
+        <a class="item" *ngIf="mode!='trade'" (click)="mode='trade'"><img src="../../assets/trade_icon.png" class="uaa-im"></a>
+
+        <!-- misc -->
+        <a class="active item" *ngIf="mode==='misc'"><img src="../../assets/misc_icon.png" class="uaa-im"> </a>
+        <a class="item" *ngIf="mode!='misc'" (click)="mode='misc'"><img src="../../assets/misc_icon.png" class="uaa-im"></a>
+
+        <!-- mapmode -->
+        <div class="ui dropdown item" id="mapmodeDropdown">
+            <div class="text">Map Mode</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item">Terrain</a>
+                <a class="item">Fertility</a>
+                <a class="item">Tile</a>
+                <a class="item">Mineral</a>
+            </div>
+        </div>
+
+        <!-- Dropdown to Select Culture -->
+        <div class="ui dropdown search selection item" id="cultureDropdown">
+            <div class="text">Select a Culture</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" *ngFor="let culture of cultures">{{culture.player}} ({{culture.name}})</a>
+            </div>
+        </div>
+
+        <!-- Add Culture -->
+
+        <!-- Edit Culture -->
+
+        <!-- Add State -->
+
+        <!-- Edit State -->
+
+
+
+        <!-- Errors -->
+        <a class="item"><i class="exclamation icon"></i></a>
+
+
+        <!-- Save -->
+        <a class="item"><i class="save icon"></i></a>
+
+        <!-- Clear -->
+        <a class="item"><i class="trash icon"></i></a>
+
+        <!-- 
+            Map:
+                Select - click on a tile and that culture becomes the selected one
+                Paint - click on a tile and that tile gets added to the current culture. Right click clears tile
+                |
+                Icon modes - 1 for each settlement, 1 for port, 1 for misc, 1 for farm (places highest possible level)
+                |
+                Map Mode dropdown (for terrain, tile, fert, mineral)
+            
+            Cultures:
+                Currently Selected culture + color
+                Dropdown to select culture, with search
+                Add Culture (opens modal)
+                Edit Culture (opens modal)
+                Add State
+                Edit State
+            
+            Errors:
+                Lists all errors
+         -->
+    </div>
+
+    <!-- Map -->
+    <div class="outer-box" [ngStyle]="{'background-image': 'url(' + bgIm + ')'}">
+        <div class="grid" *ngFor="let grid of gridMat">
+            <div class="row" *ngFor="let row of grid">
+                <div *ngFor="let cell of row" [ngStyle]="
+                    {
+                        'border-left':'1px solid ' + cell.color,
+                        'border-bottom':'1px solid ' + cell.color,
+                        'width': (cell.width) + 'px',
+                        'max-width': (cell.width) + 'px',
+                        'min-width': (cell.width) + 'px',
+                        'height': (cell.height) + 'px',
+                        'max-height': (cell.height) + 'px',
+                        'min-height': (cell.height) + 'px',
+                        'float': 'inline-start',
+                        'background-color': cell.color,
+                        'opacity': cell.opacity,
+                        'padding-top': '0px',
+                        'line-height': '0px'
+                    }" (click)="interaction(cell.i, cell.j, cell.k)">
+                    <!-- Text & Icons here! -->
+                    <img src="../../assets/small_outpost_icon.png" class="uaa-im" *ngIf="cell.small_outpost">
+                    <img src="../../assets/camp_icon.png" class="uaa-im" *ngIf="cell.camp">
+                    <img src="../../assets/large_outpost_icon.png" class="uaa-im" *ngIf="cell.large_outpost">
+                    <img src="../../assets/pen_icon.png" class="uaa-im" *ngIf="cell.pen">
+                    <img src="../../assets/village_icon.png" class="uaa-im" *ngIf="cell.village">
+                    <img src="../../assets/city_icon.png" class="uaa-im" *ngIf="cell.city">
+                    <img src="../../assets/citadel_icon.png" class="uaa-im" *ngIf="cell.citadel">
+                    <img src="../../assets/misc_icon.png" class="uaa-im" *ngIf="cell.misc">
+
+                    <br *ngIf="cell.port || cell.trade">
+                    <img src="../../assets/port_icon.png" class="uaa-im" *ngIf="cell.port">
+                    <img src="../../assets/trade_icon.png" class="uaa-im" *ngIf="cell.trade">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add/Edit Culture Modal -->
+
+<!--
+    Settings:
+     - Culture Name
+     - Player Name
+     - Observer (checkbox)
+     - Agriculture Level (None, Agriculture, Selective Breeding, Irritagtion)
+     - State Level (Hunter Gatherer, Society, Early State, City State, Region State, Mature State)
+ -->
+
+<!-- Add/Edit State Modal -->
+
+<!--
+    Settings:
+     - State Name
+ -->

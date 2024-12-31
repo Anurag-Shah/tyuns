@@ -1,0 +1,25 @@
+.outer-box{
+    width:4000px !important;
+    max-width:4000px !important;
+    height:2000px !important;
+    max-height: 2000px !important;
+}
+
+.row{
+    border-width: 1px !important;
+    width: auto !important;
+}
+
+.grid{
+    width: auto !important;
+}
+
+.uaa-im{
+    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+    image-rendering: -o-crisp-edges;            /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: pixelated;                 /* Universal support since 2021   */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+}
